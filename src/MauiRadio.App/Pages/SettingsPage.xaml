@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage x:Class="MauiRadio.App.Pages.SettingsPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiRadio.App.ViewModels"
+             x:DataType="vm:SettingsViewModel"
+             xmlns:models="clr-namespace:MauiRadio.App.Models"
+             xmlns:entities="clr-namespace:MauiRadio.Core.Entities;assembly=MauiRadio.Core"
+             Title="{Binding Title}"
+             Padding="10"
+             xmlns:local="clr-namespace:MauiRadio.App.Pages">
+    <ScrollView>
+        <CollectionView ItemsSource="{Binding Countries}" IsGrouped="True" SelectionMode="Single" SelectedItem="{Binding SelectedCountry}" SelectionChanged="CollectionView_SelectionChanged">
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding Title}" FontAttributes="Bold" Padding="5" />
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="entities:Country">
+                    <Grid ColumnDefinitions="50, Auto" Padding="10">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="CommonStates">
+                                <VisualState Name="Normal" />
+                                <VisualState Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="Yellow" />
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Label Text="{Binding Flag}" />
+                        <Label Grid.Column="1" Text="{Binding Name}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ScrollView>
+</ContentPage>

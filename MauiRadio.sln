@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.32804.182
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5D7BF3A7-064B-44B5-BE80-FFD2907916C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0370EAD5-FC11-43BC-88F6-3BC2C46AB9CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiRadio.App", "src\MauiRadio.App\MauiRadio.App.csproj", "{7042090A-D8B4-4612-8747-A6370D25DD2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiRadio.Core", "src\MauiRadio.Core\MauiRadio.Core.csproj", "{2B751370-A597-45CE-97AA-B056188C6504}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiRadio.Core.Tests", "tests\MauiRadio.Core.Tests\MauiRadio.Core.Tests.csproj", "{BC8ABCC9-B78F-462F-A18C-6CE490B1DA59}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7042090A-D8B4-4612-8747-A6370D25DD2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7042090A-D8B4-4612-8747-A6370D25DD2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7042090A-D8B4-4612-8747-A6370D25DD2B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7042090A-D8B4-4612-8747-A6370D25DD2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7042090A-D8B4-4612-8747-A6370D25DD2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7042090A-D8B4-4612-8747-A6370D25DD2B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2B751370-A597-45CE-97AA-B056188C6504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B751370-A597-45CE-97AA-B056188C6504}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B751370-A597-45CE-97AA-B056188C6504}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B751370-A597-45CE-97AA-B056188C6504}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC8ABCC9-B78F-462F-A18C-6CE490B1DA59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC8ABCC9-B78F-462F-A18C-6CE490B1DA59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC8ABCC9-B78F-462F-A18C-6CE490B1DA59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC8ABCC9-B78F-462F-A18C-6CE490B1DA59}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7042090A-D8B4-4612-8747-A6370D25DD2B} = {5D7BF3A7-064B-44B5-BE80-FFD2907916C9}
+		{2B751370-A597-45CE-97AA-B056188C6504} = {5D7BF3A7-064B-44B5-BE80-FFD2907916C9}
+		{BC8ABCC9-B78F-462F-A18C-6CE490B1DA59} = {0370EAD5-FC11-43BC-88F6-3BC2C46AB9CD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DBE21A80-1CB9-462E-975B-399ECF6393CE}
+	EndGlobalSection
+EndGlobal

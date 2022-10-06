@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage x:Class="MauiRadio.App.Pages.MainPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiRadio.App.ViewModels"
+             xmlns:entity="clr-namespace:MauiRadio.Core.Entities;assembly=MauiRadio.Core"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="vm:MainPageViewModel"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:MauiRadio.App.Pages"
+             IsBusy="{Binding IsLoading}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="settings_white_48dp.svg" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior
+        EventName="Appearing"
+        Command="{Binding LoadDataCommand}" />
+    </ContentPage.Behaviors>
+    <ContentPage.Content>
+        <CollectionView ItemsSource="{Binding Records}" RemainingItemsThreshold="3" RemainingItemsThresholdReachedCommand="{Binding LoadDataCommand}" SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="entity:Station">
+                    <Grid Padding="10" ColumnDefinitions="60,*" ColumnSpacing="5">
+                        <Image Source="{Binding Favicon}" WidthRequest="50" HeightRequest="50" />
+                        <Label Text="{Binding Name}" Grid.Column="1" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ContentPage.Content>
+</ContentPage>
