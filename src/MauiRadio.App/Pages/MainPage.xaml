@@ -10,15 +10,38 @@
              xmlns:local="clr-namespace:MauiRadio.App.Pages"
              IsBusy="{Binding IsLoading}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="settings_white_48dp.svg" />
+        <ToolbarItem IconImageSource="settings_white_48dp.svg" x:Name="SettingsButton" Clicked="ToolbarItem_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior
         EventName="Appearing"
         Command="{Binding LoadDataCommand}" />
     </ContentPage.Behaviors>
+    <ContentPage.Resources>
+        <DataTemplate x:Name="BottomSheetTemplate" x:Key="BottomSheetTemplate">
+            <ScrollView>
+                <VerticalStackLayout
+					Spacing="25"
+					Padding="30,0"
+					VerticalOptions="Center">
+
+                    <Image Source="{Binding SelectedRecord.Favicon}"
+					       WidthRequest="200"
+					       HeightRequest="200"/>
+
+                    <Label
+						Text="{Binding SelectedRecord.Name}"
+						SemanticProperties.HeadingLevel="Level1"
+						SemanticProperties.Description="Selected Station for playing"
+						FontSize="18"
+						HorizontalOptions="Center" />
+
+                </VerticalStackLayout>
+            </ScrollView>
+        </DataTemplate>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <CollectionView ItemsSource="{Binding Records}" RemainingItemsThreshold="3" RemainingItemsThresholdReachedCommand="{Binding LoadDataCommand}" SelectionMode="Single">
+        <CollectionView ItemsSource="{Binding Records}" SelectedItem="{Binding SelectedRecord}" RemainingItemsThreshold="3" RemainingItemsThresholdReachedCommand="{Binding LoadDataCommand}" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="entity:Station">
                     <Grid Padding="10" ColumnDefinitions="60,*" ColumnSpacing="5">

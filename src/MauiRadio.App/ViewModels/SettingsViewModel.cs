@@ -2,6 +2,7 @@
 using MauiRadio.App.Models;
 using MauiRadio.Core.Entities;
 using MauiRadio.Core.Services;
+using System.Collections.ObjectModel;
 
 namespace MauiRadio.App.ViewModels
 {
@@ -11,19 +12,26 @@ namespace MauiRadio.App.ViewModels
         {
             Title = "Preferences";
             IsLoading = true;
-            Task.Run(async () =>
+            Countries.Clear();
+            try
             {
-                var countries = await countryService.FetchCountriesAsync();
-                foreach (var country in countries.OrderBy(c => c.Name).GroupBy(c => c.Name[0]))
+                Task.Run(async () =>
                 {
-                    Countries.Add(new Grouped<Country>(country.Key.ToString(), country.ToList()));
-                    OnPropertyChanged(nameof(Countries));
-                }
+                    var countries = await countryService.FetchCountriesAsync();
+                    foreach (var country in countries.OrderBy(c => c.Name).GroupBy(c => c.Name[0]))
+                    {
+                        Countries.Add(new Grouped<Country>(country.Key.ToString(), country.ToList()));
+                    }
+                    IsLoading = false;
+                });
+            }
+            catch (Exception ex) 
+            {
                 IsLoading = false;
-            });
+            }
         }
 
-        public IList<Grouped<Country>> Countries { get; private set; } = new List<Grouped<Country>>();
+        public ObservableCollection<Grouped<Country>> Countries { get; private set; } = new ObservableCollection<Grouped<Country>>();
 
         [ObservableProperty]
         private Country? selectedCountry;

@@ -12,7 +12,15 @@ namespace MauiRadio.App.ViewModels
         [ObservableProperty]
         private int remainingItemsThreshold;
 
+        [ObservableProperty]
+        private T selectedRecord;
+
         public ObservableCollection<T> Records { get; set; } = new ObservableCollection<T>();
+
+        protected virtual T GetDefaultSelectedRecord()
+        {
+            throw new NotImplementedException();
+        }
 
         protected virtual Task<IEnumerable<T>> FetchDataAsync(int pageNumber, int pageSize)
         {
@@ -39,6 +47,7 @@ namespace MauiRadio.App.ViewModels
             pageNumber = -1;
             this.pageSize = pageSize;
             this.RemainingItemsThreshold = remainingItemsThreshold;
+            this.selectedRecord = GetDefaultSelectedRecord();
         }
     }
 }

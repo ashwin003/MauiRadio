@@ -7,21 +7,22 @@ namespace MauiRadio.App.Pages
     {
         private readonly SettingsViewModel viewModel;
         private readonly IPreferenceManager preferencesManager;
-        private readonly MainPage mainPage;
+        private readonly IServiceProvider serviceProvider;
 
-        public SettingsPage(SettingsViewModel viewModel, IPreferenceManager preferencesManager, MainPage mainPage)
+        public SettingsPage(IServiceProvider serviceProvider)
         {
             InitializeComponent();
+            var viewModel = serviceProvider.GetRequiredService<SettingsViewModel>();
             this.viewModel = viewModel;
-            this.preferencesManager = preferencesManager;
-            this.mainPage = mainPage;
-            this.BindingContext = viewModel;
+            preferencesManager = serviceProvider.GetRequiredService<IPreferenceManager>();
+            BindingContext = viewModel;
+            this.serviceProvider = serviceProvider;
         }
 
-        private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             preferencesManager.SavePreferences(Constants.UserPreferencesKey, this.viewModel.SelectedCountry);
-            Navigation.PushAsync(new NavigationPage(mainPage));
+            await Navigation.PushAsync(new NavigationPage(serviceProvider.GetRequiredService<MainPage>()));
         }
     }
 }

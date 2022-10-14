@@ -16,6 +16,11 @@ namespace MauiRadio.App.ViewModels
             this.stationService = stationService;
         }
 
+        protected override Station GetDefaultSelectedRecord()
+        {
+            return new Station();
+        }
+
         protected override async Task<IEnumerable<Station>> FetchDataAsync(int pageNumber, int pageSize)
         {
             return await Task.Run(async () => await stationService.SearchStationsAsync(preference.Code, pageNumber, pageSize, Enumerable.Empty<string>()));

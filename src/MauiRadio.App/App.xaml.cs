@@ -9,7 +9,8 @@ namespace MauiRadio.App
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(preferencesManager.ContainsKey(Constants.UserPreferencesKey) ? serviceProvider.GetRequiredService<MainPage>() : serviceProvider.GetRequiredService<SettingsPage>());
+            var arePreferencesSaved = preferencesManager.ContainsKey(Constants.UserPreferencesKey);
+            MainPage = new NavigationPage(arePreferencesSaved ? serviceProvider.GetRequiredService<MainPage>() : serviceProvider.GetRequiredService<SettingsPage>());
         }
     }
 }
