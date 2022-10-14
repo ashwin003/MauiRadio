@@ -1,4 +1,5 @@
 ﻿using MauiRadio.App.ViewModels;
+using MauiRadio.App.Services;
 #if WINDOWS
 using MauiRadio.App.Platforms.Windows.Extensions;
 #endif
@@ -17,12 +18,16 @@ namespace MauiRadio.App.Pages
     public partial class MainPage : ContentPage
     {
         private readonly IServiceProvider serviceProvider;
+        private readonly MainPageViewModel viewModel;
+        private readonly IMusicPlayer musicPlayer;
 
         public MainPage(IServiceProvider serviceProvider)
         {
             InitializeComponent();
             this.serviceProvider = serviceProvider;
-            BindingContext = serviceProvider.GetRequiredService<MainPageViewModel>();
+            viewModel = serviceProvider.GetRequiredService<MainPageViewModel>();
+            BindingContext = viewModel;
+            musicPlayer = serviceProvider.GetRequiredService<IMusicPlayer>();
         }
 
         private async void ToolbarItem_Clicked(object sender, EventArgs e)
@@ -32,7 +37,13 @@ namespace MauiRadio.App.Pages
 
         private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.ShowBottomSheet(GetBottomSheetView(), true);
+            if(!string.IsNullOrWhiteSpace(viewModel.SelectedRecord.Url))
+            {
+                this.ShowBottomSheet(GetBottomSheetView(), true);
+                this.musicPlayer.Stop();
+                var playing = this.musicPlayer.Play(viewModel.SelectedRecord);
+                Console.WriteLine(playing);
+            }
         }
 
         private View GetBottomSheetView()

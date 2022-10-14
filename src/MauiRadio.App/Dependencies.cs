@@ -1,4 +1,4 @@
-﻿using MauiRadio.App;
+﻿using LibVLCSharp.Shared;
 using MauiRadio.App.Pages;
 using MauiRadio.App.Services;
 using MauiRadio.App.ViewModels;
@@ -23,7 +23,11 @@ namespace Microsoft.Extensions.DependencyInjection
 
         internal static IServiceCollection AddServices(this IServiceCollection services)
         {
-            return services.AddSingleton<IPreferenceManager, PreferenceManager>();
+            return services
+                .AddSingleton<IPreferenceManager, PreferenceManager>()
+                .AddSingleton<LibVLC>((s) => new LibVLC())
+                .AddSingleton<MediaPlayer>()
+                .AddTransient<IMusicPlayer, MusicPlayer>();
         }
     }
 }
