@@ -1,12 +1,11 @@
-﻿using MauiRadio.App.Services;
-using MauiRadio.App.ViewModels;
+﻿using MauiRadio.App.ViewModels;
 
 namespace MauiRadio.App.Pages
 {
     public partial class SettingsPage : ContentPage
     {
         private readonly SettingsViewModel viewModel;
-        private readonly IPreferenceManager preferencesManager;
+        private readonly IPreferences preferencesManager;
         private readonly IServiceProvider serviceProvider;
 
         public SettingsPage(IServiceProvider serviceProvider)
@@ -14,14 +13,14 @@ namespace MauiRadio.App.Pages
             InitializeComponent();
             var viewModel = serviceProvider.GetRequiredService<SettingsViewModel>();
             this.viewModel = viewModel;
-            preferencesManager = serviceProvider.GetRequiredService<IPreferenceManager>();
+            preferencesManager = serviceProvider.GetRequiredService<IPreferences>();
             BindingContext = viewModel;
             this.serviceProvider = serviceProvider;
         }
 
         private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            preferencesManager.SavePreferences(Constants.UserPreferencesKey, this.viewModel.SelectedCountry);
+            preferencesManager.Set(Constants.UserPreferencesKey, this.viewModel.SelectedCountry);
             await Navigation.PushAsync(new NavigationPage(serviceProvider.GetRequiredService<MainPage>()));
         }
     }

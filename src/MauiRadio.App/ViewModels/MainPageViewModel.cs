@@ -9,9 +9,9 @@ namespace MauiRadio.App.ViewModels
         private readonly IStationService stationService;
         private readonly Country preference;
 
-        public MainPageViewModel(IPreferenceManager preferenceManager, IStationService stationService) : base(pageSize: 15, remainingItemsThreshold: 3)
+        public MainPageViewModel(IPreferences preferenceManager, IStationService stationService) : base(pageSize: 15, remainingItemsThreshold: 3)
         {
-            preference = preferenceManager.FetchPreferences<Country>(Constants.UserPreferencesKey)!;
+            preference = preferenceManager.Get(Constants.UserPreferencesKey, new Country())!;
             Title = preference.Name;
             this.stationService = stationService;
         }

@@ -24,8 +24,7 @@ namespace Microsoft.Extensions.DependencyInjection
         internal static IServiceCollection AddServices(this IServiceCollection services)
         {
             return services
-                .AddSingleton<IPreferenceManager, PreferenceManager>()
-                .AddSingleton<LibVLC>((s) => new LibVLC())
+                .AddSingleton((s) => new LibVLC())
                 .AddSingleton<MediaPlayer>()
                 .AddTransient<IMusicPlayer, MusicPlayer>();
         }

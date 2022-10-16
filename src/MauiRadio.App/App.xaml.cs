@@ -5,7 +5,7 @@ namespace MauiRadio.App
 {
     public partial class App : Application
     {
-        public App(IServiceProvider serviceProvider, IPreferenceManager preferencesManager)
+        public App(IServiceProvider serviceProvider, IPreferences preferencesManager)
         {
             InitializeComponent();
 
